@@ -6,12 +6,14 @@ const val effortThreshold = 0.00
 
 abstract class Calculator () {
   
-  fun calcWorkout () {
-    
+  fun calcWorkout (current: Double, attempt: Double) : Double {
+
+    return workoutEval(current, attempt)
   }
   
-  fun workoutEval (workExerted: Int, weightAttempted: Int): Int {
-    
+  fun workoutEval (workExerted: Double, weightAttempted: Double): Double {
+
+    return weightAttempted * effortThreshold
   }
   
 }
