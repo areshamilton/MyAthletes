@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyAthletes</string>
 
-    <string name="displayAdjustment">Adjustment:</string>
+    <string name="displayAdjustment">Weightlift Adjustment:</string>
 
     <string name="zero">0</string>
     <string name="one">1</string>

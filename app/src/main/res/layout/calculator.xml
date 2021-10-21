@@ -1,214 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/blue"
     android:baselineAligned="false">
 
-    <TextView
-        android:id="@+id/displayAdjustment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="36dp"
-        android:text="@string/displayAdjustment"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TableLayout
-        android:id="@+id/tableLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCalc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button1"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/one"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/two"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button3"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/three"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button4"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/four"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button5"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/five"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button6"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/six"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button7"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/seven"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button8"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/eight"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/button9"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/nine"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="230dp">
-
-            <Button
-                android:id="@+id/buttonDecimal"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/decimal"
-                android:textColor="#000000"
-                android:textSize="60sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button0"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/zero"
-                android:textColor="#000000"
-                android:textSize="60sp" />
-
-            <Button
-                android:id="@+id/buttonClear"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@drawable/num_button"
-                android:text="@string/clear"
-                android:textColor="#0000FF"
-                android:textSize="60sp" />
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/buttonCalc"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="38dp"
-        android:layout_weight="1"
-        android:background="@drawable/calc_button"
-        android:text="@string/calculate"
-        android:textColor="#FFFFFF"
-        android:textSize="44sp"
+        android:layout_height="420dp"
+        android:background="@drawable/rounded_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCalc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/one"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/two"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/three"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/four"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button5"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/five"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button6"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/six"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button7"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/seven"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button8"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/eight"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/button9"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/nine"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="230dp">
+
+                <Button
+                    android:id="@+id/buttonDecimal"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/decimal"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button0"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/zero"
+                    android:textColor="@color/textColor"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/buttonClear"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/num_button"
+                    android:text="@string/clear"
+                    android:textColor="#FF5722"
+                    android:textSize="50sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/buttonCalc"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="303dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/calc_button"
+            android:text="@string/calculate"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="223dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/displayAdjustment"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="149dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
