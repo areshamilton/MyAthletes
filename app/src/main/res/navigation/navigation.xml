@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/workoutList">
+
+    <fragment
+        android:id="@+id/videoPage"
+        android:name="com.example.myathletes.videoPage"
+        android:label="Workout Description"
+        tools:layout="@layout/video_page">
+        <argument
+            android:name="workout"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutList"
+        android:name="com.example.myathletes.workoutList"
+        android:label="List of Workouts"
+        tools:layout="@layout/workout_list">
+        <action
+            android:id="@+id/action_workoutList_to_videoPage"
+            app:destination="@id/videoPage" />
+    </fragment>
+</navigation>
