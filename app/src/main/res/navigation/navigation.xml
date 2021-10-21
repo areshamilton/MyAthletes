@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/HomePage">
+
+    <fragment
+        android:id="@+id/HomePage"
+        android:name="com.example.myathletes.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_timer"
+            app:destination="@id/timer" />
+    </fragment>
+    <fragment
+        android:id="@+id/timer"
+        android:name="com.example.myathletes.Timer"
+        android:label="timer"
+        tools:layout="@layout/timer" >
+        <action
+            android:id="@+id/action_timer_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+</navigation>
