@@ -2,6 +2,9 @@
     <string name="app_name">MyAthletes</string>
 
     <string name="displayAdjustment">Weightlift Adjustment:</string>
+    <string name="displayCurrWeightLift">Current Weightlift:</string>
+    <string name="displayRec">0</string>
+    <string name="displayHint">0</string>
 
     <string name="zero">0</string>
     <string name="one">1</string>
