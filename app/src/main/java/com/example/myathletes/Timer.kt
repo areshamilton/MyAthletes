@@ -8,153 +8,124 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.myathletes.databinding.TimerBinding
-import com.example.myathletes.util.PrefUtil
-
+import java.util.*
 
 class Timer : Fragment() {
-    enum class TimerState{
-        Stopped, Paused, Running
-    }
+    private val startTime: Long = 600000
 
-    private lateinit var timer: CountDownTimer
-    private var timerLengthSeconds = 0L
-    private var timerState = TimerState.Stopped
-    private var secondsRemaining = 0L
+    private var mCountDownTimer: CountDownTimer? = null
+    private var mTimerRunning = false
+    private var mTimeLeftInMillis = startTime
+    private var mEndTime: Long = 0
 
 
+
+    // Store the view binding as a property so it is accessible to any method
+    lateinit var binding: TimerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val binding = TimerBinding.inflate(layoutInflater)
+        // Inflate the layout for this fragment
+        binding = TimerBinding.inflate(layoutInflater)
 
         binding.backButton.setOnClickListener { view: View ->
             view.findNavController().navigate(TimerDirections.actionTimerToHomePage())
         }
 
-//        binding.startTimer.setOnClickListener { v -> startTimer()
-//            timerState = TimerState.Running
-//            updateButtons()}
-//        binding.pauseTimer.setOnClickListener { v -> timer.cancel()
-//            timerState = TimerState.Paused
-//            updateButtons()}
-//
-//        binding.stopTimer.setOnClickListener { v -> timer.cancel()
-//            onTimerFinished()}
+        binding.startPauseTimer.setOnClickListener {
+            if (mTimerRunning) {
+                pauseTimer()
+            } else {
+                startTimer()
+            }
+        }
+        binding.resetTimer.setOnClickListener { resetTimer() }
+        updateCountDownText()
+
         return binding.root
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.timer, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
-        initTimer()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if(timerState == TimerState.Running){
-            timer.cancel()
-        } else if(timerState == TimerState.Paused){
-            //TODO: show notification
-        }
-
-//        PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, this)
-//        PrefUtil.setSecondsRemaining(secondsRemaining, this)
-//        PrefUtil.setTimerState(timerState, this)
-    }
-
-    private fun initTimer(){
-//        timerState = PrefUtil.getTimerState(this)
-
-        if(timerState == TimerState.Stopped)
-            setNewTimerLength()
-        else
-            setPreviousTimerLength()
-
-//        secondsRemaining = if(timerState == TimerState.Running || timerState == TimerState.Paused)
-//            PrefUtil.getSecondsRemaining(this)
-//        else // keeps the timer running since it is saved in the paused/stopped
-//            timerLengthSeconds
 
 
-        // resume where we left off
-        if(timerState == TimerState.Running) {
-            startTimer()
-        }
+    //    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        mTimeLeftInMillis = savedInstanceState.getLong("millisLeft")
+//        mTimerRunning = savedInstanceState.getBoolean("timerRunning")
+//        updateCountDownText()
+//        updateButtons()
+//        if (mTimerRunning) {
+//            mEndTime = savedInstanceState.getLong("endTime")
+//            mTimeLeftInMillis = mEndTime - System.currentTimeMillis()
+//            startTimer()
+//        }
+//    }
 
-        updateButtons()
-        updateCountdownUI()
-    }
+    private fun startTimer() {
+        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis
+        mCountDownTimer = object : CountDownTimer(mTimeLeftInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                mTimeLeftInMillis = millisUntilFinished
+                updateCountDownText()
+            }
 
-    private fun onTimerFinished(){
-        timerState = TimerState.Stopped
-
-        setNewTimerLength()
-//        progress_bar.progress = 0
-
-//        PrefUtil.setSecondsRemaining(timerLengthSeconds, this)
-        secondsRemaining = timerLengthSeconds
-        updateButtons()
-        updateCountdownUI()
-    }
-
-    private fun startTimer(){
-        timerState = TimerState.Running
-        timer = object : CountDownTimer(secondsRemaining * 1000, 1000){
-            override fun onFinish() = onTimerFinished()
-            override fun onTick(millisecondsUntilFinished: Long) {
-                secondsRemaining = millisecondsUntilFinished / 1000
-                updateCountdownUI()
+            override fun onFinish() {
+                mTimerRunning = false
+                updateButtons()
             }
         }.start()
+        mTimerRunning = true
+        updateButtons()
     }
 
-    private fun setNewTimerLength(){
-//        val lengthInMinutes = PrefUtil.getTimerLength(this)
-//        timerLengthSeconds = (lengthInMinutes * 60L)
-//        progress_bar.max = timerLengthSeconds.toInt()
+    private fun pauseTimer() {
+        mCountDownTimer!!.cancel()
+        mTimerRunning = false
+        updateButtons()
     }
 
-    private fun setPreviousTimerLength(){
-//        timerLengthSeconds = PrefUtil.getPreviousTimerLengthSeconds(this)
-//        progress_bar.max = timerLengthSeconds.toInt()
+    private fun resetTimer() {
+        mTimeLeftInMillis = startTime
+        updateCountDownText()
+        updateButtons()
     }
 
-    private fun updateCountdownUI(){
-        val minutesUntilFinished = secondsRemaining / 60
-        val secondsInMinutesUntilFinished = secondsRemaining - minutesUntilFinished * 60
-        val secondsString = secondsInMinutesUntilFinished.toString()
-//        time_count_down.text = "$minutesUntilFinished: ${
-//            if(secondsString.length == 2)
-//                secondsString
-//            else
-//                "0" + secondsString
-//        }"
-//
-//        progress_bar.progress = (timerLengthSeconds - secondsRemaining).toInt()
+    private fun updateCountDownText() {
+        val minutes = (mTimeLeftInMillis / 1000).toInt() / 60
+        val seconds = (mTimeLeftInMillis / 1000).toInt() % 60
+        val timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+//        mTextViewCountDown!!.text = timeLeftFormatted
+        binding.timeCountDown.text = timeLeftFormatted
     }
 
-    private fun updateButtons(){
-        when(timerState){
-//            TimerState.Running->{
-//                startTimer.isEnabled = false
-//                pauseTimer.isEnabled = true
-//                stopTimer.isEnabled = true
-//            }
-//            TimerState.Stopped->{
-//                startTimer.isEnabled = true
-//                pauseTimer.isEnabled = false
-//                stopTimer.isEnabled = false
-//            }
-//            TimerState.Paused->{
-//                startTimer.isEnabled = true
-//                pauseTimer.isEnabled = false
-//                stopTimer.isEnabled = true
-//            }
+    private fun updateButtons() {
+        if (mTimerRunning) {
+            binding.resetTimer.visibility = View.INVISIBLE
+            binding.startPauseTimer.setText("Pause")
+        } else {
+            binding.startPauseTimer.setText("Start")
+            if (mTimeLeftInMillis < 1000) {
+                binding.startPauseTimer.visibility = View.INVISIBLE
+            } else {
+                binding.startPauseTimer.visibility = View.VISIBLE
+            }
+            if (mTimeLeftInMillis < startTime) {
+                binding.resetTimer.visibility = View.VISIBLE
+            } else {
+                binding.resetTimer.visibility = View.INVISIBLE
+            }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save view hierarchy
+        super.onSaveInstanceState(outState)
+
+        outState.putLong("millisLeft", mTimeLeftInMillis)
+        outState.putBoolean("timerRunning", mTimerRunning)
+        outState.putLong("endTime", mEndTime)
+
     }
 
 }

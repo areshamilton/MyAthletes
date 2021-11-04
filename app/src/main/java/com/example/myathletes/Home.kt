@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import com.example.myathletes.databinding.FragmentHomeBinding
 
 
-
 class Home : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
