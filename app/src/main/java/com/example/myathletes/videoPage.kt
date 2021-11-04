@@ -33,7 +33,11 @@ class videoPage : Fragment() {
         // displays a photo of the workout
         // NOTE: using an image instead of a view until we learn how to use APIs
         // for now, the link is just the name of an image file
-        binding.photo.setImageResource(R.drawable.bench_press)
+        if (args.link == "bench_press") {
+            binding.photo.setImageResource(R.drawable.bench_press)
+        } else if (args.link == "treadmill") {
+            binding.photo.setImageResource(R.drawable.treadmill)
+        }
         // TODO: this is hardcoded^^. Find out how to dynamically change images displayed.
 
 
