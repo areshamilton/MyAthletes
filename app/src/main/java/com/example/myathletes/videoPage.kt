@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.myathletes.database.WorkoutDatabase
 import com.example.myathletes.databinding.VideoPageBinding
 
 class videoPage : Fragment() {
@@ -17,29 +20,40 @@ class videoPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // inflates the layout for this fragment
-        val binding = VideoPageBinding.inflate(layoutInflater)
+        // Retrieve arguments passed from the RecyclerView
+        val args = videoPageArgs.fromBundle(
+            requireArguments()
+        )
 
-        // stores the Video object passed in and stores it into args
-        val args = videoPageArgs.fromBundle(requireArguments())
+        // Create data binding
+        val binding: VideoPageBinding =
+            DataBindingUtil.inflate(inflater, R.layout.video_page, container, false)
 
-        // displays the name of the workout
-        binding.workout.text = args.workout
+        // Get reference to this application
+        val application = requireNotNull(this.activity).application
 
-        // displays the description of the workout
-        binding.description.text = args.description
-        // TODO: get the margins to work properly
+        // Retrieve Intersection data access object.
+        val dataSource = WorkoutDatabase.getInstance(application).workoutDao
 
-        // displays a photo of the workout
-        // NOTE: using an image instead of a view until we learn how to use APIs
-        // for now, the link is just the name of an image file
-        if (args.link == "bench_press") {
-            binding.photo.setImageResource(R.drawable.bench_press)
-        } else if (args.link == "treadmill") {
-            binding.photo.setImageResource(R.drawable.treadmill)
-        }
-        // TODO: this is hardcoded^^. Find out how to dynamically change images displayed.
+        // Create a factory that generates a videoPageViewModel connected to the database. The
+        // workoutId passed from the RecyclerView is used to display the corresponding
+        // information.
+        val viewModelFactory =
+            IntersectionItemViewModelFactory(args.workoutId, dataSource, application)
 
+        // Generate a videoPageViewModel using the factory.
+        val videoPageViewModel =
+            ViewModelProvider(
+                this, viewModelFactory
+            ).get(VideoPageViewModel::class.java)
+
+        binding.photo.setImageResource(R.drawable.bench_press)
+
+
+        // Connect the videoPageViewModel with the variable in the layout
+        binding.videoPageViewModel = videoPageViewModel
+        // Assign the lifecycle owner to the activity so it manages the data accordingly.
+        binding.lifecycleOwner = this
 
         return binding.root
     }

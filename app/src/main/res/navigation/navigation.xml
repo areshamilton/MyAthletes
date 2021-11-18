@@ -11,14 +11,8 @@
         android:label="Workout Description"
         tools:layout="@layout/video_page">
         <argument
-            android:name="workout"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
-        <argument
-            android:name="link"
-            app:argType="string" />
+            android:name="workoutId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/workoutList"
