@@ -1,21 +1,25 @@
 package com.example.myathletes
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.*
+import androidx.room.Room
 import com.example.myathletes.database.Signup
 import com.example.myathletes.database.SignupDao
+import com.example.myathletes.database.SignupDatabase
 import kotlinx.coroutines.launch
 
 /**
- * IntersectionViewModel used for data binding. Provides a connection to the database
+ * SignupViewModel used for data binding. Provides a connection to the database
  * for storing and retrieving corresponding values.
  */
 class SignupViewModel(
     val database: SignupDao, // Data access object for the Intersection entity
-    application: Application) : AndroidViewModel(application) {
-
+    application: Application,
+) : AndroidViewModel(application) {
+    var password = MutableLiveData("")
     var name = MutableLiveData("")
-    var location = MutableLiveData("")
+    var id = MutableLiveData("")
 
     // Retrieves all Intersection objects from the database
     // Represented as a LiveData<List<Intersection>>
@@ -26,21 +30,21 @@ class SignupViewModel(
      * object and returns a LiveData-wrapped object.
      */
     val signupList = database.getAllSignups()
-    var signupString = Transformations.map(signupList) {
-            signups -> // intersections refer to the underlying data List<Intersection>
-        var result = ""
-        // Retrieve each Intersection object from the list
-        for (signup in signups) {
-            // Create a string using the Intersection name and location.
-            // The intersection string is appended to a longer string with all intersections.
-            result += "${signup.signupId} @ ${signup.email}\n"
+    var signupString =
+        Transformations.map(signupList) { signups -> // intersections refer to the underlying data List<Intersection>
+            var result = ""
+            // Retrieve each Intersection object from the list
+            for (signup in signups) {
+                // Create a string using the signup name and email.
+                // The result string is appended to a longer string with all ids and emails.
+                result += "${signup.name} @ ${signup.signupId}\n"
+            }
+            // Returns the aggregated String that is wrapped by the map function in a LiveData object.
+            result
         }
-        // Returns the aggregated String that is wrapped by the map function in a LiveData object.
-        result
-    }
 
     /**
-     * Inserts the Intersection object into the database.
+     * Inserts the signup object into the database.
      */
     fun insert() {
         // Launch coroutines in the viewModelScope so that the coroutines are automatically
@@ -49,12 +53,11 @@ class SignupViewModel(
             // Create Intersection object using data stored in the EditText views
             var signup = Signup()
             signup.name = name.value.toString()
-            signup.email = location.value.toString()
-
+            signup.signupId = id.value.toString()
+            signup.password = password.value.toString()
             // Insert data to the database using the insert coroutine.
             database.insert(signup)
         }
-
     }
 
     /**

@@ -7,14 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "signup_table")
 data class Signup(
 
-    @PrimaryKey(autoGenerate = true)
-    var signupId: Long = 0L,
+    @PrimaryKey()
+    var signupId: String = "",
 
     @ColumnInfo()
     var name: String = "",
-
-    @ColumnInfo()
-    var email: String = "",
 
     @ColumnInfo()
     var password: String = ""
