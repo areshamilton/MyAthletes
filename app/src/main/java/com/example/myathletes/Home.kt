@@ -18,7 +18,7 @@ class Home : Fragment() {
         val binding = FragmentHomeBinding.inflate(layoutInflater)
 
         binding.timerButton.setOnClickListener {view: View ->
-            view.findNavController().navigate(HomeDirections.actionHome2ToTimer()) }
+            view.findNavController().navigate(HomeDirections.actionHome2ToTimer(binding.workoutName.text.toString())) }
 
         return binding.root
     }

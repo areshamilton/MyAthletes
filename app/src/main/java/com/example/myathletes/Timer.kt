@@ -18,8 +18,6 @@ class Timer : Fragment() {
     private var mTimeLeftInMillis = startTime
     private var mEndTime: Long = 0
 
-
-
     // Store the view binding as a property so it is accessible to any method
     lateinit var binding: TimerBinding
 
@@ -27,8 +25,16 @@ class Timer : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         // Inflate the layout for this fragment
         binding = TimerBinding.inflate(layoutInflater)
+
+        /** Retrieve arguments passed by the navigate method call and store
+         * them in a variable called args.
+         */
+        val args = TimerArgs.fromBundle(requireArguments())
+        binding.workoutName.text ="Current Workout: ${args.workout}"
 
         binding.backButton.setOnClickListener { view: View ->
             view.findNavController().navigate(TimerDirections.actionTimerToHomePage())
@@ -44,23 +50,14 @@ class Timer : Fragment() {
         binding.resetTimer.setOnClickListener { resetTimer() }
         updateCountDownText()
 
+        //Place holder for the workout database/array to go to next workout when button is clicked
+//        binding.nextWorkoutButton.setOnClickListener { view: View ->
+//          workout[x].name
+//        }
+
         return binding.root
     }
 
-
-
-    //    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//        mTimeLeftInMillis = savedInstanceState.getLong("millisLeft")
-//        mTimerRunning = savedInstanceState.getBoolean("timerRunning")
-//        updateCountDownText()
-//        updateButtons()
-//        if (mTimerRunning) {
-//            mEndTime = savedInstanceState.getLong("endTime")
-//            mTimeLeftInMillis = mEndTime - System.currentTimeMillis()
-//            startTimer()
-//        }
-//    }
 
     private fun startTimer() {
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis
@@ -127,5 +124,21 @@ class Timer : Fragment() {
         outState.putLong("endTime", mEndTime)
 
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (savedInstanceState != null) {
+            mTimeLeftInMillis = savedInstanceState.getLong("millisLeft")
+            mTimerRunning = savedInstanceState.getBoolean("timerRunning")
+            updateCountDownText()
+            updateButtons()
+            if (mTimerRunning) {
+                mEndTime = savedInstanceState.getLong("endTime")
+                mTimeLeftInMillis = mEndTime - System.currentTimeMillis()
+                startTimer()
+            }
+        }
+    }
+
 
 }

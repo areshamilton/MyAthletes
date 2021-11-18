@@ -22,5 +22,8 @@
         <action
             android:id="@+id/action_timer_to_HomePage"
             app:destination="@id/HomePage" />
+        <argument
+            android:name="workout"
+            app:argType="string" />
     </fragment>
 </navigation>
