@@ -16,9 +16,9 @@ abstract class Calculator () {
   }
 
   //workoutEval will do the actual calculations comparing the current workout to desired thresholds
-  // INCOMPLETE
+  // If actual work exerted is less than the expected weight attempted
   fun workoutEval (workExerted: Double, weightAttempted: Double): Double {
-
+    
     return weightAttempted * effortThreshold
   }
   
