@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.myathletes.database.SignupDatabase
+import com.example.myathletes.databinding.ActivityMainBinding
 import com.example.myathletes.databinding.SignupBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Create data binding
-        val binding: SignupBinding =
+        val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // Get reference to this application
@@ -35,5 +36,6 @@ class MainActivity : AppCompatActivity() {
         binding.signupViewModel = signupViewModel
         // Assign the lifecycle owner to the activity so it manages the data accordingly.
         binding.lifecycleOwner = this
+
     }
 }

@@ -1,7 +1,6 @@
 package com.example.myathletes
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
 import androidx.room.Room
 import com.example.myathletes.database.Signup
@@ -51,7 +50,7 @@ class SignupViewModel(
         // canceled when the ViewModel is destroyed.
         viewModelScope.launch {
             // Create Intersection object using data stored in the EditText views
-            var signup = Signup()
+            val signup = Signup()
             signup.name = name.value.toString()
             signup.signupId = id.value.toString()
             signup.password = password.value.toString()
@@ -63,12 +62,4 @@ class SignupViewModel(
     /**
      * Deletes all Intersection entities in the database.
      */
-    fun clear() {
-        // Launch coroutines in the viewModelScope so that the coroutines are automatically
-        // canceled when the ViewModel is destroyed.
-        viewModelScope.launch {
-            // Delete data from the database using the clear coroutine.
-            database.clear()
-        }
-    }
 }

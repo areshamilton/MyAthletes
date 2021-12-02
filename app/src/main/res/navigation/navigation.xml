@@ -3,46 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/signup2">
+    app:startDestination="@id/credentials">
 
     <fragment
-        android:id="@+id/mainMenu"
-        android:name="com.example.myathletes.MainMenu"
-        android:label="fragment_main_menu"
-        tools:layout="@layout/main_menu" >
-        <action
-            android:id="@+id/action_mainMenu_to_calculator_placeholder"
-            app:destination="@id/calculator_placeholder" />
-        <action
-            android:id="@+id/action_mainMenu_to_timer_placehold"
-            app:destination="@id/timer_placehold" />
-        <action
-            android:id="@+id/action_mainMenu_to_video_placehold"
-            app:destination="@id/video_placehold" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/signup2"
-        android:name="com.example.myathletes.signup"
-        android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
-        <action
-            android:id="@+id/action_signup2_to_mainActivity4"
-            app:destination="@id/mainActivity4" />
-    </fragment>
-    <fragment android:id="@+id/calculator_placeholder" />
-    <fragment android:id="@+id/timer_placehold" />
-    <fragment android:id="@+id/video_placehold" />
-    <fragment
-        android:id="@+id/mainActivity4"
-        android:name="com.example.myathletes.MainActivity"
-        android:label="credentials"
-        tools:layout="@layout/credentials" >
-        <action
-            android:id="@+id/action_mainActivity4_to_signup2"
-            app:destination="@id/signup2" />
-        <action
-            android:id="@+id/action_mainActivity4_to_mainMenu"
-            app:destination="@id/mainMenu" />
-    </fragment>
+        android:id="@+id/credentials"
+        android:name="com.example.myathletes.Credentials"
+        android:label="Credentials" />
 </navigation>
