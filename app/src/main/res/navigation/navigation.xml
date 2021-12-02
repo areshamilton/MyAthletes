@@ -8,5 +8,13 @@
     <fragment
         android:id="@+id/credentials"
         android:name="com.example.myathletes.Credentials"
-        android:label="Credentials" />
+        android:label="Credentials" >
+        <action
+            android:id="@+id/action_credentials_to_signup2"
+            app:destination="@id/signup2" />
+    </fragment>
+    <fragment
+        android:id="@+id/signup2"
+        android:name="com.example.myathletes.Signup"
+        android:label="Signup" />
 </navigation>
