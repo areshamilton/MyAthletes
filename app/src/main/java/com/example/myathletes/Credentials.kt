@@ -29,16 +29,10 @@ class Credentials : Fragment() {
     ): View? {
 
 
-
-    // Create data binding
-   // val binding: CredentialsBinding =
-     //   DataBindingUtil.setContentView(this, R.layout.credentials)
-
        val binding: CredentialsBinding =
            DataBindingUtil.inflate(inflater, R.layout.credentials,container, false)
     // Get reference to this application
-    //val application = requireNotNull(this).application
-  /*  val application = requireActivity().application
+     val application = requireActivity().application
     // Retrieve Intersection data access object.
     val dataSource = SignupDatabase.getInstance(application).signupDao
 
@@ -54,7 +48,6 @@ class Credentials : Fragment() {
     binding.signupViewModel = signupViewModel
     // Assign the lifecycle owner to the activity so it manages the data accordingly.
     binding.lifecycleOwner = this
-*/
 
     return binding.root
     }
