@@ -6,15 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import com.example.myathletes.database.SignupDatabase
 import com.example.myathletes.databinding.CredentialsBinding
 
@@ -28,11 +22,10 @@ class Credentials : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
-       val binding: CredentialsBinding =
-           DataBindingUtil.inflate(inflater, R.layout.credentials,container, false)
+    val binding: CredentialsBinding =
+        DataBindingUtil.inflate(inflater, R.layout.credentials,container, false)
     // Get reference to this application
-     val application = requireActivity().application
+    val application = requireActivity().application
     // Retrieve Intersection data access object.
     val dataSource = SignupDatabase.getInstance(application).signupDao
 
@@ -49,6 +42,14 @@ class Credentials : Fragment() {
     // Assign the lifecycle owner to the activity so it manages the data accordingly.
     binding.lifecycleOwner = this
 
+       binding.signup.setOnClickListener(){ view: View ->
+           view.findNavController()
+               .navigate(R.id.action_credentials_to_signup2)
+       }
+       binding.submit.setOnClickListener(){ view: View ->
+           view.findNavController()
+               .navigate(R.id.action_credentials_to_main_menu)
+       }
     return binding.root
     }
 }

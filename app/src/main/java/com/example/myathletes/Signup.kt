@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import com.example.myathletes.databinding.CredentialsBinding
+import com.example.myathletes.databinding.SignupBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +28,14 @@ class Signup : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.signup, container, false)
+        val binding: SignupBinding =
+            DataBindingUtil.inflate(inflater, R.layout.signup,container, false)
+
+        binding.signup.setOnClickListener(){ view: View ->
+            view.findNavController()
+                .navigate(R.id.action_signup2_to_credentials)
+        }
+        return binding.root
     }
 
 

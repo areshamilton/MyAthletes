@@ -12,9 +12,21 @@
         <action
             android:id="@+id/action_credentials_to_signup2"
             app:destination="@id/signup2" />
+        <action
+            android:id="@+id/action_credentials_to_main_menu"
+            app:destination="@id/main_menu" />
     </fragment>
     <fragment
         android:id="@+id/signup2"
         android:name="com.example.myathletes.Signup"
-        android:label="Signup" />
+        android:label="Signup" >
+        <action
+            android:id="@+id/action_signup2_to_credentials"
+            app:destination="@id/credentials" />
+    </fragment>
+    <fragment
+        android:id="@+id/main_menu"
+        android:name="com.example.myathletes.Mainmenu"
+        android:label="main_menu"
+        tools:layout="@layout/mainmenu" />
 </navigation>
