@@ -33,12 +33,12 @@ class Timer : Fragment() {
         /** Retrieve arguments passed by the navigate method call and store
          * them in a variable called args.
          */
-        val args = TimerArgs.fromBundle(requireArguments())
+        /*val args = TimerArgs.fromBundle(requireArguments())
         binding.workoutName.text ="Current Workout: ${args.workout}"
 
         binding.backButton.setOnClickListener { view: View ->
             view.findNavController().navigate(TimerDirections.actionTimerToHomePage())
-        }
+        }*/
 
         binding.startPauseTimer.setOnClickListener {
             if (mTimerRunning) {

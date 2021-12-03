@@ -29,6 +29,14 @@
         android:id="@+id/main_menu"
         android:name="com.example.myathletes.Mainmenu"
         android:label="main_menu"
-        tools:layout="@layout/mainmenu" />
+        tools:layout="@layout/mainmenu" >
+        <action
+            android:id="@+id/action_main_menu_to_timer2"
+            app:destination="@id/timer2" />
+    </fragment>
+    <fragment
+        android:id="@+id/timer2"
+        android:name="com.example.myathletes.Timer"
+        android:label="Timer" />
 
 </navigation>
