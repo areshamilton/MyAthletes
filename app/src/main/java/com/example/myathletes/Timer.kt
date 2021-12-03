@@ -6,16 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import com.example.myathletes.databinding.TimerBinding
 import java.util.*
 
 class Timer : Fragment() {
-    private val startTime: Long = 600000
 
     private var mCountDownTimer: CountDownTimer? = null
     private var mTimerRunning = false
-    private var mTimeLeftInMillis = startTime
+    private var mStartTimeInMillis: Long = 60000
+    private var mTimeLeftInMillis: Long = 0
     private var mEndTime: Long = 0
 
     // Store the view binding as a property so it is accessible to any method
@@ -35,10 +34,8 @@ class Timer : Fragment() {
          */
         /*val args = TimerArgs.fromBundle(requireArguments())
         binding.workoutName.text ="Current Workout: ${args.workout}"
-
-        binding.backButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(TimerDirections.actionTimerToHomePage())
         }*/
+        binding.progressBar.progress = 100
 
         binding.startPauseTimer.setOnClickListener {
             if (mTimerRunning) {
@@ -50,6 +47,15 @@ class Timer : Fragment() {
         binding.resetTimer.setOnClickListener { resetTimer() }
         updateCountDownText()
 
+        binding.buttonSet.setOnClickListener {
+            var input = binding.editTextInput.text.toString()
+
+            var millisInput = input.toLong() * 60000
+
+            setTime(millisInput)
+            binding.editTextInput.setText("")
+        }
+
         //Place holder for the workout database/array to go to next workout when button is clicked
 //        binding.nextWorkoutButton.setOnClickListener { view: View ->
 //          workout[x].name
@@ -58,6 +64,10 @@ class Timer : Fragment() {
         return binding.root
     }
 
+    private fun setTime(milliseconds: Long){
+        mStartTimeInMillis = milliseconds
+        resetTimer()
+    }
 
     private fun startTimer() {
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis
@@ -69,56 +79,70 @@ class Timer : Fragment() {
 
             override fun onFinish() {
                 mTimerRunning = false
-                updateButtons()
+                updateWatchUI()
             }
         }.start()
         mTimerRunning = true
-        updateButtons()
+        updateWatchUI()
     }
 
     private fun pauseTimer() {
         mCountDownTimer!!.cancel()
         mTimerRunning = false
-        updateButtons()
+        updateWatchUI()
     }
 
     private fun resetTimer() {
-        mTimeLeftInMillis = startTime
+        mTimeLeftInMillis = mStartTimeInMillis
         updateCountDownText()
-        updateButtons()
+        updateWatchUI()
     }
 
     private fun updateCountDownText() {
-        val minutes = (mTimeLeftInMillis / 1000).toInt() / 60
+        val hours   = (mTimeLeftInMillis / 1000).toInt() / 3600
+        val minutes = ((mTimeLeftInMillis / 1000).toInt() % 3600) / 60
         val seconds = (mTimeLeftInMillis / 1000).toInt() % 60
-        val timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
-//        mTextViewCountDown!!.text = timeLeftFormatted
+
+        var timeLeftFormatted: String = if(hours > 0){
+            String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds)
+        } else{
+            String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+        }
+
+        binding.progressBar.progress = ((mTimeLeftInMillis.toDouble() / mStartTimeInMillis) * 100).toInt()
+//        Toast.makeText(activity, "Current progress : ${binding.progressBar.progress}", Toast.LENGTH_SHORT).show()
         binding.timeCountDown.text = timeLeftFormatted
     }
 
-    private fun updateButtons() {
+    private fun updateWatchUI() {
         if (mTimerRunning) {
+            binding.editTextInput.visibility = View.INVISIBLE
+            binding.buttonSet.visibility = View.INVISIBLE
             binding.resetTimer.visibility = View.INVISIBLE
-            binding.startPauseTimer.setText("Pause")
+            binding.startPauseTimer.text = "Pause"
         } else {
-            binding.startPauseTimer.setText("Start")
+            binding.editTextInput.visibility = View.VISIBLE
+            binding.buttonSet.visibility = View.VISIBLE
+            binding.startPauseTimer.text = "Start"
             if (mTimeLeftInMillis < 1000) {
                 binding.startPauseTimer.visibility = View.INVISIBLE
             } else {
                 binding.startPauseTimer.visibility = View.VISIBLE
             }
-            if (mTimeLeftInMillis < startTime) {
+            if (mTimeLeftInMillis < mStartTimeInMillis) {
                 binding.resetTimer.visibility = View.VISIBLE
             } else {
                 binding.resetTimer.visibility = View.INVISIBLE
             }
         }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         // Save view hierarchy
         super.onSaveInstanceState(outState)
 
+        outState.putLong("startTimeInMillis", mStartTimeInMillis)
         outState.putLong("millisLeft", mTimeLeftInMillis)
         outState.putBoolean("timerRunning", mTimerRunning)
         outState.putLong("endTime", mEndTime)
@@ -128,10 +152,11 @@ class Timer : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (savedInstanceState != null) {
-            mTimeLeftInMillis = savedInstanceState.getLong("millisLeft")
+            mStartTimeInMillis = savedInstanceState.getLong("startTimeInMillis")
+            mTimeLeftInMillis  = savedInstanceState.getLong("millisLeft")
             mTimerRunning = savedInstanceState.getBoolean("timerRunning")
             updateCountDownText()
-            updateButtons()
+            updateWatchUI()
             if (mTimerRunning) {
                 mEndTime = savedInstanceState.getLong("endTime")
                 mTimeLeftInMillis = mEndTime - System.currentTimeMillis()
