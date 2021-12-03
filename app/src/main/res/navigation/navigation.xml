@@ -3,27 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/HomePage">
+
+    app:startDestination="@id/credentials">
 
     <fragment
-        android:id="@+id/HomePage"
-        android:name="com.example.myathletes.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/credentials"
+        android:name="com.example.myathletes.Credentials"
+        android:label="Credentials" >
         <action
-            android:id="@+id/action_home2_to_timer"
-            app:destination="@id/timer" />
+            android:id="@+id/action_credentials_to_signup2"
+            app:destination="@id/signup2" />
+        <action
+            android:id="@+id/action_credentials_to_main_menu"
+            app:destination="@id/main_menu" />
     </fragment>
     <fragment
-        android:id="@+id/timer"
-        android:name="com.example.myathletes.Timer"
-        android:label="timer"
-        tools:layout="@layout/timer" >
+        android:id="@+id/signup2"
+        android:name="com.example.myathletes.Signup"
+        android:label="Signup" >
         <action
-            android:id="@+id/action_timer_to_HomePage"
-            app:destination="@id/HomePage" />
-        <argument
-            android:name="workout"
-            app:argType="string" />
+            android:id="@+id/action_signup2_to_credentials"
+            app:destination="@id/credentials" />
     </fragment>
+    <fragment
+        android:id="@+id/main_menu"
+        android:name="com.example.myathletes.Mainmenu"
+        android:label="main_menu"
+        tools:layout="@layout/mainmenu" />
+
 </navigation>

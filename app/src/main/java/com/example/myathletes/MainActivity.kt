@@ -3,16 +3,28 @@ package com.example.myathletes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.myathletes.database.SignupDatabase
+import com.example.myathletes.databinding.SignupBinding
+
 import android.os.CountDownTimer
 import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.myathletes.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
+
+        //Josephs
+        // Create data binding
+        //   val binding = setContentView(R.layout.activity_main)
+
+
 
         // using a binding object for the visuals
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,8 +40,4 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.nav_host)
         return navController.navigateUp()
     }
-
-
-
-
 }
