@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.myathletes.database.WorkoutDao
 import com.example.myathletes.database.WorkoutDatabase
 import com.example.myathletes.databinding.VideoPageBinding
 
@@ -47,13 +48,31 @@ class videoPage : Fragment() {
                 this, viewModelFactory
             ).get(VideoPageViewModel::class.java)
 
-        binding.photo.setImageResource(R.drawable.bench_press)
-
 
         // Connect the videoPageViewModel with the variable in the layout
         binding.videoPageViewModel = videoPageViewModel
+
+
+
+        //change image display based
+        // IMPORTANT: The workoutId does NOT reset upon clearing the database,
+        //            so these values are relative to where workoutId currently is
+        if (args.workoutId == 15L) {
+            binding.photo.setImageResource(R.drawable.bench_press)
+        }
+        if (args.workoutId == 16L) {
+            binding.photo.setImageResource(R.drawable.treadmill)
+        }
+        if (args.workoutId == 17L) {
+            binding.photo.setImageResource(R.drawable.squats)
+        }
+
         // Assign the lifecycle owner to the activity so it manages the data accordingly.
         binding.lifecycleOwner = this
+
+
+
+
 
         return binding.root
     }

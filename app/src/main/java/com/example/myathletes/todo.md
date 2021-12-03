@@ -1,7 +1,0 @@
-- fix the hardcoded image display
-- fix the margins
-- implement Youtube Player API
-- figure out database pre-loading
-- add more workouts
-- clean everything up
-- find any functions I could test???
