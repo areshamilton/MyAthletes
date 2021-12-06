@@ -3,6 +3,11 @@ package com.example.myathletes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.example.myathletes.databinding.ActivityMainBinding
 
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -19,11 +24,6 @@ import com.example.myathletes.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //Josephs
-        // Create data binding
-        //   val binding = setContentView(R.layout.activity_main)
-
 
 
         // using a binding object for the visuals
