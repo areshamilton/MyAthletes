@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
 
-    app:startDestination="@id/workoutList">
+    app:startDestination="@id/credentials">
 
     <fragment
         android:id="@+id/videoPage"
@@ -24,9 +24,6 @@
             android:id="@+id/action_workoutList_to_videoPage"
             app:destination="@id/videoPage" />
     </fragment>
-
-
-    app:startDestination="@id/credentials">
 
     <fragment
         android:id="@+id/credentials"
@@ -55,6 +52,9 @@
         <action
             android:id="@+id/action_main_menu_to_timer2"
             app:destination="@id/timer2" />
+        <action
+            android:id="@+id/action_main_menu_to_workoutList"
+            app:destination="@id/workoutList" />
     </fragment>
     <fragment
         android:id="@+id/timer2"

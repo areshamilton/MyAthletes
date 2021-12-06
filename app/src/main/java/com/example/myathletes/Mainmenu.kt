@@ -9,9 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.myathletes.databinding.MainmenuBinding
 
-
 class Mainmenu : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,12 +22,11 @@ class Mainmenu : Fragment() {
             view.findNavController()
                 .navigate(R.id.action_main_menu_to_timer2)
         }
+
+        binding.description.setOnClickListener(){ view: View ->
+            view.findNavController()
+                .navigate(R.id.action_main_menu_to_workoutList)
+        }
         return binding.root
-
-
-
     }
-
-
-
 }
