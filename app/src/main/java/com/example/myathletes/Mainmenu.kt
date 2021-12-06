@@ -18,6 +18,7 @@ class Mainmenu : Fragment() {
         val binding: MainmenuBinding =
             DataBindingUtil.inflate(inflater, R.layout.mainmenu,container, false)
 
+
         binding.timer.setOnClickListener(){ view: View ->
             view.findNavController()
                 .navigate(R.id.action_main_menu_to_timer2)
