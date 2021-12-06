@@ -17,8 +17,6 @@ import com.example.myathletes.databinding.SignupBinding
 import android.os.CountDownTimer
 import android.widget.Button
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.example.myathletes.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {

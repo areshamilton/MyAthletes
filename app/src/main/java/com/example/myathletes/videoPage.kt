@@ -38,7 +38,7 @@ class videoPage : Fragment() {
 
         // Create a factory that generates a videoPageViewModel connected to the database. The
         // workoutId passed from the RecyclerView is used to display the corresponding
-        // information.
+        // information
         val viewModelFactory =
             IntersectionItemViewModelFactory(args.workoutId, dataSource, application)
 

@@ -9,7 +9,7 @@ import com.example.myathletes.database.Workout
 
 /**
  * Data access object for the Workout entity. The class describes how data is
- * stored, updated, retrieved, or deleted from the database.
+ * stored, updated, retrieved, or deleted from the database
  */
 @Dao
 interface WorkoutDao {
