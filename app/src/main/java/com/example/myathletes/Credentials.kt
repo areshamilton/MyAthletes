@@ -59,7 +59,7 @@ class Credentials : Fragment() {
                         result = true
                     }
                 }
-            }*/
+            } */
             if (binding.username.text.toString()== "root" && binding.password.text.toString() == "root" ){
                 result = true
             }
