@@ -16,9 +16,9 @@ class SignupViewModel(
     val database: SignupDao, // Data access object for the Intersection entity
     application: Application,
 ) : AndroidViewModel(application) {
-    var password = MutableLiveData("")
     var name = MutableLiveData("")
-    var id = MutableLiveData("")
+    var password = MutableLiveData("")
+
 
     // Retrieves all Intersection objects from the database
     // Represented as a LiveData<List<Intersection>>
@@ -36,7 +36,7 @@ class SignupViewModel(
             for (signup in signups) {
                 // Create a string using the signup name and email.
                 // The result string is appended to a longer string with all ids and emails.
-                result += "${signup.name} @ ${signup.signupId}\n"
+                result += "${signup.name} has been added\n"
             }
             // Returns the aggregated String that is wrapped by the map function in a LiveData object.
             result
@@ -52,14 +52,17 @@ class SignupViewModel(
             // Create Intersection object using data stored in the EditText views
             val signup = Signup()
             signup.name = name.value.toString()
-            signup.signupId = id.value.toString()
             signup.password = password.value.toString()
-            // Insert data to the database using the insert coroutine.
             database.insert(signup)
         }
     }
 
-    /**
-     * Deletes all Intersection entities in the database.
-     */
+    fun isUserNameCorrect(username: String): Boolean {
+        if (username.equals(name.toString(), true)) {
+            insert()
+            return true
+        }
+        return false
+    }
+
 }

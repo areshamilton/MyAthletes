@@ -11,7 +11,7 @@ import androidx.room.Query
 import androidx.room.Update
 
 /**
- * Data access object for the Intersection entity. The class describes how data is
+ * Data access object for the Signup entity. The class describes how data is
  * stored, updated, retrieved, or deleted from the database.
  */
 @Dao
