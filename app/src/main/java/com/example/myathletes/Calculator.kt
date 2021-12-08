@@ -1,25 +1,42 @@
 package com.example.myathletes
 
-// The calculator class will analyze a user's workout data and determine if the workout needs to be adjusted
+import android.os.Bundle
+import android.os.CountDownTimer
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import com.example.myathletes.databinding.CalculatorBinding
+import java.util.*
 
-// Placeholder value representing the threshold of work performed vs. work desired to see progress
 const val effortThreshold = 0.00
 
-abstract class Calculator () {
+class Calculator : Fragment() {
 
-  //calcWorkout is the function that will be executed when the user hits "calculate"
-  //Could retrieve workout data from multiple sources (including manual entry)
-  //INCOMPLETE
-  fun calcWorkout (current: Double, attempt: Double) : Double {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val binding: CalculatorBinding =
+            DataBindingUtil.inflate(inflater, R.layout.calculator,container, false)
+
+        return binding.root
+    }
+}
+
+/*
+fun calcWorkout (current: Double, attempt: Double) : Double {
 
     return workoutEval(current, attempt)
-  }
-
-  //workoutEval will do the actual calculations comparing the current workout to desired thresholds
-  // If actual work exerted is less than the expected weight attempted
-  fun workoutEval (workExerted: Double, weightAttempted: Double): Double {
-    
-    return weightAttempted * effortThreshold
-  }
-  
 }
+
+//workoutEval will do the actual calculations comparing the current workout to desired thresholds
+// If actual work exerted is less than the expected weight attempted
+fun workoutEval (workExerted: Double, weightAttempted: Double): Double {
+
+    return weightAttempted * effortThreshold
+}
+*/
