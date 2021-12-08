@@ -3,11 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainActivity">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.myathletes.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    app:startDestination="@id/credentials">
+
+    <fragment
+        android:id="@+id/videoPage"
+        android:name="com.example.myathletes.videoPage"
+        android:label="Workout Description"
+        tools:layout="@layout/video_page">
+        <argument
+            android:name="workoutId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutList"
+        android:name="com.example.myathletes.workoutList"
+        android:label="List of Workouts"
+        tools:layout="@layout/workout_list">
+        <action
+            android:id="@+id/action_workoutList_to_videoPage"
+            app:destination="@id/videoPage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/credentials"
+        android:name="com.example.myathletes.Credentials"
+        android:label="Credentials" >
+        <action
+            android:id="@+id/action_credentials_to_signup2"
+            app:destination="@id/signup2" />
+        <action
+            android:id="@+id/action_credentials_to_main_menu"
+            app:destination="@id/main_menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/signup2"
+        android:name="com.example.myathletes.Signup"
+        android:label="Signup" >
+        <action
+            android:id="@+id/action_signup2_to_credentials"
+            app:destination="@id/credentials" />
+    </fragment>
+    <fragment
+        android:id="@+id/main_menu"
+        android:name="com.example.myathletes.Mainmenu"
+        android:label="main_menu"
+        tools:layout="@layout/mainmenu" >
+        <action
+            android:id="@+id/action_main_menu_to_timer2"
+            app:destination="@id/timer2" />
+        <action
+            android:id="@+id/action_main_menu_to_workoutList"
+            app:destination="@id/workoutList" />
+    </fragment>
+    <fragment
+        android:id="@+id/timer2"
+        android:name="com.example.myathletes.Timer"
+        android:label="Timer" />
+
+
 </navigation>
