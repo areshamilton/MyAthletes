@@ -28,6 +28,11 @@ class Mainmenu : Fragment() {
             view.findNavController()
                 .navigate(R.id.action_main_menu_to_workoutList)
         }
+
+        binding.calculator.setOnClickListener(){ view: View ->
+            view.findNavController()
+                .navigate(R.id.action_main_menu_to_calculator3)
+        }
         return binding.root
     }
 }

@@ -55,11 +55,18 @@
         <action
             android:id="@+id/action_main_menu_to_workoutList"
             app:destination="@id/workoutList" />
+        <action
+            android:id="@+id/action_main_menu_to_calculator3"
+            app:destination="@id/calculator3" />
     </fragment>
     <fragment
         android:id="@+id/timer2"
         android:name="com.example.myathletes.Timer"
         android:label="Timer" />
+    <fragment
+        android:id="@+id/calculator3"
+        android:name="com.example.myathletes.Calculator"
+        android:label="Calculator" />
 
 
 </navigation>
